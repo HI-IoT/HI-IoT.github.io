@@ -1,0 +1,24 @@
+"# SMMCLab_Docs" 
+"# https://dev.to/achowba/build-a-simple-app-using-node-js-and-mysql-19me #"
+
+"# Provision node script as a service via forever, allowing it to automatically start on boot, working across various Linux distros and OS https://github.com/zapty/forever-service"
+
+"# Version 16.04 of ubuntu uses systemd and no longer upstart (used by forever-service). In order for the service to be installed correctly, you must install upstart-sysv:"
+    "# sudo apt-get install upstart-sysv"
+    "# sudo update-initramfs -u"
+    "# sudo reboot"
+
+"# Prerequisite: forever must be installed globally using #npm install -g forever"
+"# Install #npm install -g forever-service"
+"# Provision a service 'SMMCLab_Docs' with smmcApp.js script in current directory $ sudo forever-service install SMMCLab_Docs --script smmcApp.js"
+"# $ sudo forever-service delete SMMCLab_Docs. This command will stop service if running, clean up all provisioned files and service"
+"# $ sudo forever list. Get list of running services (Remember all forever command line options are available since we use forever internally)"
+
+Platform - Ubuntu 16.04.4 LTS
+SMMCLab_Docs provisioned successfully
+
+Commands to interact with service SMMCLab_Docs
+Start   - "sudo start SMMCLab_Docs"
+Stop    - "sudo stop SMMCLab_Docs"
+Status  - "sudo status SMMCLab_Docs"
+Restart - "sudo restart SMMCLab_Docs"

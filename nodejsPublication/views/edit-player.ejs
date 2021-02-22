@@ -1,0 +1,53 @@
+<% include partials/header.ejs %>
+<div class="container">
+   <% if (message) { %>
+   <p class="text-center text-danger"><%= message %></p>
+   <% } %>
+   <% if (player) { %>
+   <form class="add-player-form" action="" method="post" enctype="multipart/form-data">
+      <div class="form-group">
+         <label for="docsType">Type</label>
+         <select id="docsType" name="docsType" class="form-control" required>
+            <option selected><%= player.docsType %></option>
+            <option>International Journals</option>
+            <option>Domestic (Korean) Journals</option>
+            <option>International Conferences and Workshops</option>
+            <option>Domestic Conferences and Workshops</option>
+            <option>International Patents</option>
+            <option>Domestic Patents</option>
+            <option>Misc</option>
+         </select>
+      </div>
+      <div class="form-group">
+         <label for="authorList">Author List</label>
+         <input type="text" class="form-control" id="authorList" name="authorList" value="<%= player.authorList %>" required>
+      </div>
+      <div class="form-group">
+         <label for="title">Title</label>
+         <input type="text" class="form-control" id="title" name="title" value="<%= player.title %>" disabled title="Docs title can't be changed" required>
+      </div>
+      <div class="form-group">
+         <label for="journalConferName">Journal or Conference Name</label>
+         <input type="text" class="form-control" id="journalConferName" name="journalConferName" value="<%= player.journalConferName %>" required>
+      </div>
+      <div class="form-group">
+         <label for="datepicker">Date</label>
+         <input type="text" class="form-control" id="datepicker" name="datepicker" value="<%= player.month + '/' + player.day + '/' + player.year %>" required>
+      </div>
+      <div class="form-group">
+         <label for="docsLink">Link</label>
+         <input type="text" class="form-control" id="docsLink" name="docsLink" value="<%= player.docsLink %>" required>
+      </div>
+      <div class="form-group">
+         <label for="volNoPP">Volume, Number, Page</label>
+         <input type="text" class="form-control" id="volNoPP" name="volNoPP" value="<%= player.volNoPP %>" required>
+      </div>
+      <button type="submit" class="btn btn-success float-right">Update Docs</button>
+   </form>
+   <% } else { %>
+   <p class="text-center">Docs Not Found. Go <a href="/add">here</a> to add docs.</p>
+   <% } %>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<% include partials/header.ejs %>
+    <div class="table-wrapper">
+        <% if (players.length > 0) {%>
+            <table class="table table-hovered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Docs Type</th>
+                        <th scope="col">Author List</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Journal or Conference Name</th>
+                        <th scope="col">Date(mm.dd.yy)</th>
+                        <th scope="col">Link</th>
+                        <th scope="col">Vol.Num.PP</th>
+                        <th scope="col">Document File</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% players.forEach((player, index) => { %>
+                        <tr>
+                            <td><%= player.docsType %></td>
+                            <td><%= player.authorList %></td>
+                            <td><%= player.title %></td>
+                            <td><%= player.journalConferName %></td>
+                            <td><%= player.month + '/' + player.day + '/' + player.year %></td>
+                            <td><%= player.docsLink %></td>
+                            <td><%= player.volNoPP %></td>
+                            <td><%= player.docsFile %></td>
+                            <td>
+                                <a href="/edit/<%= player.title %>" target="_blank" rel="noopener" class="btn btn-sm btn-success">Edit</a>
+                                <a href="/delete/<%= player.title %>" class="btn btn-sm btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        <% } else { %>
+            <p class="text-center">No docs found. Go <a href="/add" >here</a> to add docs.</p>
+        <% } %>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<% include partials/header.ejs %>
+<div class="container">
+   <% if (message != '') { %>
+   <p class="text-center text-danger"><%= message %></p>
+   <% } %>
+   <form class="add-player-form" action="" method="post" enctype="multipart/form-data">
+      <div class="form-group">
+         <label for="docsType">Type</label>
+         <select id="docsType" name="docsType" class="form-control" required>
+            <option selected disabled value="">Choose Type of Document</option>
+            <option>International Journals</option>
+            <option>Domestic (Korean) Journals</option>
+            <option>International Conferences and Workshops</option>
+            <option>Domestic Conferences and Workshops</option>
+            <option>International Patents</option>
+            <option>Domestic Patents</option>
+            <option>Misc</option>
+         </select>
+      </div>
+      <div class="form-group">
+         <label for="authorList">Author List</label>
+         <input type="text" class="form-control" id="authorList" name="authorList" placeholder="Linh Van Ma, Gwanghyun Yu, Jin-Young Kim, Yonggwan Won, Jinsul Kim" required>
+      </div>
+      <div class="form-group">
+         <label for="title">Title</label>
+         <input type="text" class="form-control" id="title" name="title" placeholder="An efficient transmission method based on HEVC multi-view adaptive video streaming over P2P network in NFV" required>
+      </div>
+      <div class="form-group">
+         <label for="journalConferName">Journal or Conference Name</label>
+         <input type="text" class="form-control" id="journalConferName" name="journalConferName" placeholder="The Journal of Supercomputing" required>
+      </div>
+      <div class="form-group">
+         <label for="datepicker">Date</label>
+         <input type="text" class="form-control" id="datepicker" name="datepicker" placeholder="Date of Publication or Conference" required>
+      </div>
+      <div class="form-group">
+         <label for="docsLink">Link</label>
+         <input type="text" class="form-control" id="docsLink" name="docsLink" placeholder="Link to document" required>
+      </div>
+      <div class="form-group">
+         <label for="volNoPP">Volume, Number, Page</label>
+         <input type="text" class="form-control" id="volNoPP" name="volNoPP" placeholder="Volume, Number, Page (E.g. Vol.E91-B, No.3, pp.975-979)" required>
+      </div>
+      <div class="form-group">
+         <label for="docsFile"><b>Document File</b></label><br>
+         <input type="file" name="docsFile" id="docsFile" class="" required>
+      </div>
+      <button type="submit" class="btn btn-primary float-right">Add Document</button>
+   </form>
+</div>
+</div>
+</body>
+</html>

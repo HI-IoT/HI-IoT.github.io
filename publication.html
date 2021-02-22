@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>SMMCLab - Chonnam National University</title>
+    <meta name="description" content="Research Publication of SMMC Laboratory, Chonnam National University" />
+    <link rel="stylesheet" href="css/smmclab.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="css/navigation-bar.css" type="text/css" media="screen" />
+
+    <script src="script/jquery-1.12.4.js"></script>
+    <script>
+        window.onload = function() {
+            var interJournal = document.getElementById("interJournal");
+            var domesticJournal = document.getElementById("domesticJournal");
+            var interConfers = document.getElementById("interConfers");
+            var domesticConfers = document.getElementById("domesticConfers");
+            var interPatent = document.getElementById("interPatent");
+            var domesticPatent = document.getElementById("domesticPatent");
+            var misc = document.getElementById("misc");
+            var docsType = ['International Journals', 'Domestic (Korean) Journals', 'International Conferences and Workshops', 'Domestic Conferences and Workshops', 'International Patents', 'Domestic Patents', 'Misc'];
+            $.getJSON('nodejsPublication/public/assets/mysql/dbInfor.json', function(json) {
+                var array = [];
+                for (var key in json) {
+                    if (json.hasOwnProperty(key)) {
+                        var item = json[key];
+                        switch (item.docsType) {
+                            case docsType[0]:
+                                addElement(interJournal, item);
+                                break;
+                            case docsType[1]:
+                                addElement(domesticJournal, item);
+                                break;
+                            case docsType[2]:
+                                addElement(interConfers, item);
+                                break;
+                            case docsType[3]:
+                                addElement(domesticConfers, item);
+                                break;
+                            case docsType[4]:
+                                addElement(interPatent, item);
+                                break;
+                            case docsType[5]:
+                                addElement(domesticPatent, item);
+                                break;
+                            case docsType[6]:
+                                addElement(misc, item);
+                                break;
+                        }
+                    }
+                }
+            });
+        }
+
+        function addElement(tag, item) {
+            var brAfterDate = document.createElement("br");
+            var brAfterLi = document.createElement("br");
+            var aView = document.createElement("a");
+            aView.setAttribute('target', '_blank');
+            aView.setAttribute('href', item.docsLink);
+            aView.innerHTML = 'View';
+
+            var nodeSpace = document.createTextNode(" ");
+
+            var aPDF = document.createElement("a");
+            aPDF.setAttribute('target', '_blank');
+            aPDF.setAttribute('href', 'nodejsPublication/public/assets/docs/' + item.docsFile);
+            aPDF.innerHTML = 'PDF';
+
+            var author = document.createTextNode(item.authorList + ', ');
+            var title = document.createElement("i");
+            title.innerHTML = item.title + ', ';
+            var journal = document.createElement("b");
+            journal.innerHTML = item.journalConferName + ', ';
+            var volNoPP = document.createTextNode(item.volNoPP + ', ');
+            const monthNames = ["January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"
+            ];
+            var dateStr = monthNames[item.month - 1] + '/' + item.day + '/' + item.year + '.';
+            var date = document.createTextNode(dateStr);
+
+            var li = document.createElement("li");
+            li.appendChild(author);
+            li.appendChild(title);
+            li.appendChild(journal);
+            li.appendChild(volNoPP);
+            li.appendChild(date);
+
+            li.appendChild(aView);
+            li.appendChild(nodeSpace);
+            li.appendChild(nodeSpace);
+            li.appendChild(aPDF);
+
+            tag.appendChild(li);
+            
+            insertAfter(date, brAfterDate)
+            tag.appendChild(brAfterLi);
+        }
+
+        function insertAfter(referenceNode, newNode) {
+            referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+        }
+    </script>
+</head>
+
+<body>
+    <div id="container">
+        <div id="header">
+            <table>
+                <tr valign="center">
+                    <td>
+                        <a href="index.html"><img src="smmc_logo_noback.png" alt="SMMCLab_LOGO" width=300 height=88></a>
+                    </td>
+                    <td width=260></td>
+                    <td>
+                        <h4>Smart Mobile Media Computing Laboratory (SMMC)</h4>
+                        <h4>스마트 모바일 미디어 컴퓨팅 연구실</h4>
+                        <h5>
+                            <a href="http://ece.jnu.ac.kr/" target="_blank">Dept.
+                        Electronics and Computer Engineering</a><br> <a href="http://jnu.ac.kr/" target="_blank">Chonnam National
+                        University</a> ( <a href="http://global.jnu.ac.kr/" target="_blank">English</a>)
+                        </h5>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div id="cssmenu">
+            <ul>
+                <li><a href="index.html">ABOUT</a></li>
+                <li><a href="news.html">NEWS</a></li>
+                <li><a href="members.html">MEMBERS</a></li>
+                <li><a href="research.html">RESEARCH</a></li>
+                <li class='active'><a href="publication.html">PUBLICATION</a></li>
+            </ul>
+        </div>
+        <div id="navigation2">
+            <ul>
+                <li><a href="#Journals">Journals</a></li>
+                <li><a href="#DomesticJournals">Domestic Journals</a></li>
+                <li><a href="#Conferences">Conferences</a></li>
+                <li><a href="#DomesticConferences">Domestic Conferences</a></li>
+                <li><a href="#Patents">Patents</a></li>
+                <li><a href="#TechReports">Tech Reports</a></li>
+            </ul>
+        </div>
+        <div id="content">
+            <h2>
+                <a name="Journals"><img src="pub_international.png">International Journals</a>
+            </h2>
+            <ol id='interJournal'>
+                
+            </ol>
+            <h2>
+                <a name="DomesticJournals"><img src="pub_domestic.png"> Domestic (Korean) Journals</a>
+            </h2>
+            <ol id='domesticJournal'>
+                
+            </ol>
+            <h2>
+                <a name="Conferences"><img src="pub_conferences.png"> International Conferences and Workshops</a>
+            </h2>
+            <ol id='interConfers'>
+                
+            </ol>
+            <h2>
+                <a name="DomesticConferences"><img src="pub_extra.png">Domestic Conferences</a>
+            </h2>
+            <ol id='domesticConfers'>
+                
+            </ol>
+            <h2>
+                <a name="Patents"><img src="pub_patent.png">International Patents</a>
+            </h2>
+            <ol id='interPatent'>
+                
+            </ol>
+            <h2>
+                <a name="Patents"><img src="pub_patent.png">Domestic Patents</a>
+            </h2>
+            <ol id='domesticPatent'>
+            </ol>
+            <h2>
+                <a name="TechReports"><img src="pub_extra.png">Technical Things</a>
+            </h2>
+            <ol <ol id='misc'>
+                
+            </ol>
+        </div>
+        <div id="footer">
+            <script src="script/lastModifiedScript.js"></script>
+        </div>
+    </div>
+</body>
+
+</html>
